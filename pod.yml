@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: textchess
+  labels:
+    app: textchess
+spec:
+  containers: 
+    - name : textchess
+      image: iem22/textchess:version_1
+      ports:
+        - containerPort: 3000
