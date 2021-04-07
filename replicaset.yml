@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: rs-1
+spec:
+  replicas: 3
+  template: 
+    metadata:
+      name: textchess
+      labels:
+        app: textchess
+    spec:
+      containers:
+      - name: textchess
+        image: iem22/textchess:version_1
+  selector:
+    matchLabels:
+      app: textchess

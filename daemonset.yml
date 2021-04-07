@@ -1,0 +1,22 @@
+#kubectl get nodes 
+#kubectl label node <minikube> nodelabel=label1
+
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: daemonset-1
+spec:
+  selector:
+    matchLabels: 
+      app: textchess
+  template:
+    metadata:
+      name: textchess
+      labels:
+        app: textchess
+    spec:
+      nodeSelector:
+        nodelabel: label1
+      containers:
+      - name: textchess
+        image: iem22/textchess:version_1

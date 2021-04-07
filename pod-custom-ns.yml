@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: textchess-custom-ns
+  namespace: custom-ns
+  labels:
+    kaustav: ganguli
+spec:
+  containers:
+    - name: textchess-custom-ns
+      image: iem22/textchess:version_1
