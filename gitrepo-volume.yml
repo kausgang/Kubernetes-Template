@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: gitrepo-volume-poc
+spec:
+  volumes:
+  - name: volume-1
+    gitRepo:
+      repository: https://github.com/kausgang/interactive_world_map.git
+      revision: master
+      directory: .
+  containers:
+  - name: webserver
+    image: nginx:alpine
+    volumeMounts: 
+      - name: volume-1
+        mountPath: /usr/share/nginx/html #default html directory for nginx
+        readOnly: true
+    ports:
+      - containerPort: 80
+        protocol: TCP
