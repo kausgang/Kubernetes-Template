@@ -1,22 +1,34 @@
-#!/usr/bin/bash
-
 #using tutorial https://phoenixnap.com/kb/install-kubernetes-on-ubuntu
 #make sure the network deployment is done the way this script is written, and not the website way
 
-export password=CHANGE_ME
-export name_name=CHANGE_ME
+printf "Enter the password for the user"
+read password
+printf "Enter what hostname you want for the Control Plane"
+read node_name
 
-if [ `echo $password` == 'CHANGE_ME' ]
+#export password=osboxes.org
+
+#if [ `echo $password` == 'CHANGE_ME' ]
+#then
+#echo "update the password field with user's password"
+#exit 1
+#fi
+
+
+if [ `echo $password` == '' ]
 then
-echo "update the password field with user's password"
+echo "Enter valid password for the user installing kubernetes"
 exit 1
 fi
 
-if [ `echo $node_name` == 'CHANGE_ME' ]
+
+if [ `echo $node_name` == '' ]
 then
-echo "update the password field with worker node's name"
+echo "Enter valid hostname for the control plane"
 exit 1
 fi
+
+
 
 echo $password | sudo -S apt-get update
 echo $password | sudo -S apt-get install -y docker.io
