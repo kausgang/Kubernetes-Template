@@ -28,20 +28,20 @@ then
 echo "Enter valid hostname for the control plane"
 exit 1
 fi
+#!/usr/bin/bash
 
 
-
-echo $password | sudo -S apt-get update
-echo $password | sudo -S apt-get install -y docker.io
-echo $password | sudo -S systemctl enable docker
-echo $password | sudo -S systemctl start docker
-echo $password | sudo -S apt-get install -y curl
+apt-get update
+apt-get install -y docker.io
+systemctl enable docker
+systemctl start docker
+apt-get install -y curl
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
-echo $password | sudo -S apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
-echo $password | sudo -S apt-get install -y kubeadm kubelet kubectl
-echo $password | sudo -S apt-mark hold kubeadm kubelet kubectl
-echo $password | sudo -S swapoff -a
-echo $password | sudo -S hostnamectl set-hostname $node_name
+apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+apt-get install -y kubeadm kubelet kubectl
+apt-mark hold kubeadm kubelet kubectl
+swapoff -a
+# hostnamectl set-hostname $node_name
 
 
 printf "\n\n"
@@ -49,17 +49,17 @@ printf "\n\n"
 #printf "Go to master node and get the kubeadm join command saved in /home/<USER_RUNNING_KUBERNETES>/JOIN_NETWORK.sh. Run the command in the file to join network"
 
 #so that it doesn't ask to add certificate while copying
-ssh-keyscan -H $master_IP >> ~/.ssh/known_hosts
+ssh-keyscan -H 192.168.50.10 >> ~/.ssh/known_hosts
 
 #so that it dowsn't ask for password
-echo $password | sudo -S apt-get install -y sshpass
+apt-get install -y sshpass
 
 
-sshpass -p $master_password scp $master_user@$master_IP:/home/$master_user/JOIN_NETWORK.sh .
+sshpass -p vagrant scp vagrant@192.168.50.10:/home/vagrant/JOIN_NETWORK.sh .
 chmod +x JOIN_NETWORK.sh
-echo $password | sudo -S ./JOIN_NETWORK.sh
+./JOIN_NETWORK.sh
 
-mkdir -p $HOME/.kube
-sshpass -p $master_password scp $master_user@$master_IP:/home/$master_user/.kube/config $HOME/.kube/config
+mkdir -p /home/vagrant/.kube
+sshpass -p vagrant scp vagrant@192.168.50.10:/home/vagrant/.kube/config /home/vagrant/.kube/config
 
 

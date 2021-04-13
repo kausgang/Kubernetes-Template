@@ -1,18 +1,14 @@
+#!/usr/bin/bash
+
+
 #using tutorial https://phoenixnap.com/kb/install-kubernetes-on-ubuntu
 #make sure the network deployment is done the way this script is written, and not the website way
 
-printf "Enter the password for the user :- "
+printf "Enter the password for the user `whoami` :- "
 read password
 printf "Enter what hostname you want for the Control Plane :- "
 read master_node_hostname
 
-#export password=osboxes.org
-
-#if [ `echo $password` == 'CHANGE_ME' ]
-#then
-#echo "update the password field with user's password"
-#exit 1
-#fi
 
 
 if [ `echo $password` == '' ]
