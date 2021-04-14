@@ -49,7 +49,7 @@ printf "\n\n"
 #printf "Go to master node and get the kubeadm join command saved in /home/<USER_RUNNING_KUBERNETES>/JOIN_NETWORK.sh. Run the command in the file to join network"
 
 #so that it doesn't ask to add certificate while copying
-ssh-keyscan -H 192.168.50.10 >> ~/.ssh/known_hosts
+ssh-keyscan -H 192.168.50.10 >> /home/vagrant/.ssh/known_hosts
 
 #so that it dowsn't ask for password
 apt-get install -y sshpass
