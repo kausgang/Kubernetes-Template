@@ -59,7 +59,10 @@ printf "\n\n"
 # chmod +x /home/vagrant/JOIN_NETWORK.sh
 # /home/vagrant/JOIN_NETWORK.sh
 
-# mkdir -p /home/vagrant/.kube
+mkdir -p /home/vagrant/.kube
+cp /vagrant_data/config /home/vagrant/.kube/config
+
+cp /vagrant_data/JOIN_NETWORK.sh /home/vagrant/JOIN_NETWORK.sh
 chmod +x /home/vagrant/JOIN_NETWORK.sh
 /home/vagrant/JOIN_NETWORK.sh
 # sshpass -p vagrant scp vagrant@192.168.50.10:/home/vagrant/.kube/config /home/vagrant/.kube/config

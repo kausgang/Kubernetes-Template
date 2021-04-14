@@ -7,7 +7,8 @@ systemctl start docker
 apt-get install -y curl
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
 apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
-apt-get install -y kubeadm kubelet kubectl
+# apt-get install -y kubeadm kubelet kubectl
+apt-get install -y kubeadm=1.21.0 kubelet=1.21.0 kubectl=1.21.0
 apt-mark hold kubeadm kubelet kubectl
 swapoff -a
 # hostnamectl set-hostname master
@@ -28,6 +29,8 @@ printf "\n\n"
 tail -20 join.txt
 
 
-tail -2 join.txt > /home/vagrant/JOIN_NETWORK.sh
+tail -2 join.txt > /vagrant_data/JOIN_NETWORK.sh
+cp /home/vagrant/.kube/config /vagrant_data/config
+
 rm join.txt
 rm kube-flannel.yml
