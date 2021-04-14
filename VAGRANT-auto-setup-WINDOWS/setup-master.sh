@@ -8,7 +8,7 @@ apt-get install -y curl
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
 apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
 # apt-get install -y kubeadm kubelet kubectl
-apt-get install -y kubeadm=1.21.0 kubelet=1.21.0 kubectl=1.21.0
+apt-get install -y kubeadm=1.21.0-00 kubelet=1.21.0-00 kubectl=1.21.0-00
 apt-mark hold kubeadm kubelet kubectl
 swapoff -a
 # hostnamectl set-hostname master
