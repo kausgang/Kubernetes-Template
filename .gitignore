@@ -39,3 +39,5 @@ Thumbs.db
 
 # Vagrant 
 .vagrant
+JOIN_NETWORK.sh
+config
