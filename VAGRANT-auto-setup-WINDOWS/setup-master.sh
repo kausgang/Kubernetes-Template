@@ -12,8 +12,8 @@ apt-get install -y kubeadm=1.21.0-00 kubelet=1.21.0-00 kubectl=1.21.0-00
 apt-mark hold kubeadm kubelet kubectl
 swapoff -a
 
-# kubeadm init --pod-network-cidr=10.244.0.0/16 2>&1 | tee join.txt
-kubeadm init --pod-network-cidr=192.168.0.0/16 2>&1 | tee join.txt
+kubeadm init --pod-network-cidr=10.244.0.0/16 2>&1 | tee join.txt
+# kubeadm init --pod-network-cidr=192.168.0.0/16 2>&1 | tee join.txt
 mkdir -p /home/vagrant/.kube
 cp -i /etc/kubernetes/admin.conf /home/vagrant/.kube/config
 chown $(id -u):$(id -g) /home/vagrant/.kube/config
@@ -23,10 +23,11 @@ chown $(id -u):$(id -g) /home/vagrant/.kube/config
 
 # curl https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml -O
 # kubectl apply -f kube-flannel.yml
+kubectl apply -f /vagrant_data/kube-flannel.yml
 
 
-echo "[TASK 3] Deploy Calico network"
-kubectl --kubeconfig=/etc/kubernetes/admin.conf create -f https://docs.projectcalico.org/v3.18/manifests/calico.yaml 
+# echo "[TASK 3] Deploy Calico network"
+# kubectl --kubeconfig=/etc/kubernetes/admin.conf create -f https://docs.projectcalico.org/v3.18/manifests/calico.yaml 
 
 
 printf "\n\n"
