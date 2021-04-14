@@ -26,16 +26,17 @@ chown $(id -u):$(id -g) /home/vagrant/.kube/config
 
 
 echo "[TASK 3] Deploy Calico network"
-kubectl --kubeconfig=/etc/kubernetes/admin.conf create -f https://docs.projectcalico.org/v3.18/manifests/calico.yaml >/dev/null 2>&1
+kubectl --kubeconfig=/etc/kubernetes/admin.conf create -f https://docs.projectcalico.org/v3.18/manifests/calico.yaml 
 
 
 printf "\n\n"
 
-tail -20 join.txt
+# tail -20 join.txt
 
 
 tail -2 join.txt > /vagrant_data/JOIN_NETWORK.sh
 cp /home/vagrant/.kube/config /vagrant_data/config
+chmod 755 /home/vagrant/.kube/config
 
 rm join.txt
-rm kube-flannel.yml
+# rm kube-flannel.yml
