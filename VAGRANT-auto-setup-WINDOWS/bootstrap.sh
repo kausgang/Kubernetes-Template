@@ -67,6 +67,6 @@ apt-mark hold kubeadm kubelet kubectl
 
 echo "[TASK] Update /etc/hosts file"
 cat >>/etc/hosts<<EOF
-172.16.16.100   master
-172.16.16.101   worker-1
+192.168.1.100   master
+192.168.1.101   worker-1
 EOF
