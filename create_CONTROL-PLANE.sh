@@ -8,6 +8,15 @@
 # ubuntu 20.10
 # docker 20.10.7
 # kubernetes 1.22
+
+###################################################################################################
+# after reboot...swap area will be enabled ...restart kubectl service issue these below commands  #
+# sudo swapoff -a                                                                                 #  
+# sudo systemctl start kubelet                                                                    #
+###################################################################################################  
+
+
+
 printf "Enter the password for the user `whoami` :- "
 read password
 
