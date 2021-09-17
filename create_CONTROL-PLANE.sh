@@ -17,7 +17,14 @@
 ###################################################################################################
 # after reboot...swap area will be enabled ...restart kubectl service issue these below commands  #
 # sudo swapoff -a                                                                                 #  
-# sudo systemctl start kubelet                                                                    #
+# sudo systemctl start kubelet       
+#
+# later add this to ~/.bashrc
+# echo Kolkata#1 | sudo -S swapoff -a
+# echo Kolkata#1 | sudo -S sudo systemctl start kubelet
+#
+# printf "\n\n"
+#                                                             
 ###################################################################################################  
 
 
