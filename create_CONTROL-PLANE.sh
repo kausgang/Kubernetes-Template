@@ -4,10 +4,14 @@
 #using tutorial https://phoenixnap.com/kb/install-kubernetes-on-ubuntu
 #make sure the network deployment is done the way this script is written, and not the website way
 
+# this worked with 
+# ubuntu 20.10
+# docker 20.10.7
+# kubernetes 1.22
 printf "Enter the password for the user `whoami` :- "
 read password
-printf "Enter what hostname you want for the Control Plane :- "
-read master_node_hostname
+
+# export master_node_hostname=`hostname`
 
 
 
@@ -18,11 +22,7 @@ exit 1
 fi
 
 
-if [ `echo $master_node_hostname` == '' ]
-then
-echo "Enter valid hostname for the control plane"
-exit 1
-fi
+
 
 
 
@@ -30,13 +30,23 @@ echo $password | sudo -S apt-get update
 echo $password | sudo -S apt-get install -y docker.io
 echo $password | sudo -S systemctl enable docker
 echo $password | sudo -S systemctl start docker
+# Add current user to docker group so that docker command can be run by non root user
+echo $password | sudo -S usermod -aG docker $USER
+# install curl
 echo $password | sudo -S apt-get install -y curl
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
 echo $password | sudo -S apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
 echo $password | sudo -S apt-get install -y kubeadm kubelet kubectl
 echo $password | sudo -S apt-mark hold kubeadm kubelet kubectl
 echo $password | sudo -S swapoff -a
-echo $password | sudo -S hostnamectl set-hostname $master_node_hostname
+# echo $password | sudo -S hostnamectl set-hostname $master_node_hostname
+
+# https://giters.com/kubernetes/kubeadm/issues/2559?amp=1
+# update /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+# In Ubuntu distro, docker comes by default with the native control group driver cgroupfs while kublet assumes systemd. So I changed the kublet config in /etc/systemd/system/kubelet.service.d/10-kubeadm to Environment="KUBELET_KUBECONFIG_ARGS=--bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig=/etc/kubernetes/kubelet.conf --cgroup-driver=cgroupfs"
+echo $password | sudo -S cp /etc/systemd/system/kubelet.service.d/10-kubeadm.conf /etc/systemd/system/kubelet.service.d/10-kubeadm.conf_BACKUP
+echo $password | sudo -S sed -i 's/kubelet.conf"/kubelet.conf --cgroup-driver=cgroupfs"/g' /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+
 echo $password | sudo -S kubeadm init --pod-network-cidr=10.244.0.0/16 2>&1 | tee join.txt
 mkdir -p $HOME/.kube
 echo $password | sudo -S cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
@@ -45,6 +55,9 @@ echo $password | sudo -S chown $(id -u):$(id -g) $HOME/.kube/config
 #using flannel for virtual network
 #see https://kubernetes.io/docs/concepts/cluster-administration/addons/ for other options
 
+# in future this below command will not work as 
+# Warning: policy/v1beta1 PodSecurityPolicy is deprecated in v1.21+, unavailable in v1.25+
+# check https://github.com/flannel-io/flannel for details
 curl https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml -O
 kubectl apply -f kube-flannel.yml
 
