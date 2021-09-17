@@ -22,6 +22,7 @@
 
 
 
+
 printf "Enter the password for the user `whoami` :- "
 read password
 
@@ -75,6 +76,13 @@ echo $password | sudo -S chown $(id -u):$(id -g) $HOME/.kube/config
 curl https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml -O
 kubectl apply -f kube-flannel.yml
 
+
+
+# https://github.com/calebhailey/homelab/issues/3
+# By default, your cluster will not schedule pods on the control-plane node for security reasons. If you want to be able to schedule pods on the control-plane node, e.g. for a single-machine Kubernetes cluster for development, run:
+# kubectl taint nodes --all node-role.kubernetes.io/master-
+
+kubectl taint nodes --all node-role.kubernetes.io/master-
 
 printf "\n\n"
 
