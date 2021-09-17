@@ -19,7 +19,7 @@
 # sudo swapoff -a                                                                                 #  
 # sudo systemctl start kubelet       
 #
-# later add this to ~/.bashrc
+# add this to ~/.bashrc
 # echo Kolkata#1 | sudo -S swapoff -a
 # echo Kolkata#1 | sudo -S sudo systemctl start kubelet
 #
@@ -33,9 +33,6 @@
 printf "Enter the password for the user `whoami` :- "
 read password
 
-# export master_node_hostname=`hostname`
-
-
 
 if [ `echo $password` == '' ]
 then
@@ -44,7 +41,11 @@ exit 1
 fi
 
 
-
+# this is required to start kubelets after host machine reboots
+echo "`printf "\n\n"` 
+echo $password | sudo -S swapoff -a
+echo $password | sudo -S sudo systemctl start kubelet
+printf '\n\n'" >> ~/.bashrc
 
 
 
@@ -99,3 +100,6 @@ tail -20 join.txt
 tail -2 join.txt > /home/$USER/JOIN_NETWORK.sh
 rm join.txt
 rm kube-flannel.yml
+
+
+
