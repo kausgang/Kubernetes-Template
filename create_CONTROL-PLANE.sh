@@ -1,6 +1,11 @@
 #!/usr/bin/bash
 
 
+###################################################################################################
+# Create a kubernetes master node using this script                                               #
+################################################################################################### 
+
+
 #using tutorial https://phoenixnap.com/kb/install-kubernetes-on-ubuntu
 #make sure the network deployment is done the way this script is written, and not the website way
 
