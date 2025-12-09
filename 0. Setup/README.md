@@ -37,10 +37,9 @@ Each command creates a separate Kubernetes cluster running in Docker containers.
 Example run - 
 
 ```batch
-
-C:\Users\typgang>kind create cluster --name test-cluster
+C:\Users\typgang>kind create cluster --name kind-cluster1
 enabling experimental podman provider
-Creating cluster "test-cluster" ...
+Creating cluster "kind-cluster1" ...
  • Ensuring node image (kindest/node:v1.34.0) 🖼  ...
  ✓ Ensuring node image (kindest/node:v1.34.0) 🖼
  • Preparing nodes 📦   ...
@@ -53,15 +52,14 @@ Creating cluster "test-cluster" ...
  ✓ Installing CNI 🔌
  • Installing StorageClass 💾  ...
  ✓ Installing StorageClass 💾
-Set kubectl context to "kind-test-cluster"
+Set kubectl context to "kind-kind-cluster1"
 You can now use your cluster with:
 
-kubectl cluster-info --context kind-test-cluster
+kubectl cluster-info --context kind-kind-cluster1
 
 Have a nice day! 👋
 
 C:\Users\typgang>
-
 ```
 
 
