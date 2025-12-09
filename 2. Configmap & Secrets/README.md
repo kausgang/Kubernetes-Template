@@ -15,6 +15,10 @@ In Kubernetes, managing application configuration externally from the codebase i
 
 ### **1. ConfigMaps and Secrets**
 
+> There are multiple ways to generate configmap and secrets. [See this](./Resources/Secret%20Generation.md) 
+> Out of these kustomize seemed really easy. See online documentation or this - https://www.youtube.com/watch?v=spCdNeNCuFU
+
+
 #### 🔹 ConfigMaps
 Used to store non-sensitive configuration data as key-value pairs.
 
