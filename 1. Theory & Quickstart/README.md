@@ -64,6 +64,25 @@ Nodes run your actual application containers.
 - Docker, containerd, CRI-O
 - Responsible for pulling/running containers
 
+
+### Check out the pods responsible for these components 
+
+```batch
+
+C:\Users\typgang>kubectl get pods --namespace kube-system
+NAME                                                  READY   STATUS    RESTARTS   AGE
+coredns-66bc5c9577-8pvrq                              1/1     Running   0          3m29s
+coredns-66bc5c9577-nfwq8                              1/1     Running   0          3m29s
+etcd-kind-cluster1-control-plane                      1/1     Running   0          3m36s
+kindnet-vffp9                                         1/1     Running   0          3m29s
+kube-apiserver-kind-cluster1-control-plane            1/1     Running   0          3m36s
+kube-controller-manager-kind-cluster1-control-plane   1/1     Running   0          3m36s
+kube-proxy-nqpt6                                      1/1     Running   0          3m29s
+kube-scheduler-kind-cluster1-control-plane            1/1     Running   0          3m36s
+
+C:\Users\typgang>
+```
+
 ---
 
 # 2. 🔄 **Deployment Strategies in Kubernetes**
@@ -230,6 +249,15 @@ docker push <your-dockerhub-username>/k8s-flask-api:v1
 
 # 4.6 📜 **Kubernetes Deployment Manifest (deployment.yaml)**
 
+There are different ways to generate manifest templates. [See this note](./Resources/Template%20generation.md)
+
+Below is an example command to generate a simple deployment with image `iem22/purchase:latest`
+
+`kubectl create deployment test-deployment --image=iem22/purchase:latest --dry-run=client -o yaml > deployment.yaml`
+
+there are online tools as well like this - https://k8syaml.com/
+
+
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -268,11 +296,21 @@ spec:
 
 # 4.7 🌐 **Service Manifest (service.yaml)**
 
+
 Choose service type based on your environment:
 
 - **ClusterIP** (internal only)
 - **NodePort** (access via node’s IP + port)
 - **LoadBalancer** (cloud providers)
+
+There are easy ways to generate service with kubectl command or online tool. Below is an example - 
+
+`kubectl expose deployment my-deployment --type=NodePort --port=80 --name=my-service --dry-run=client -o yaml > service.yaml`
+
+> you can deploy an Ingress controller and use it with a ClusterIP Service to expose your application, which is generally a better practice than creating a manual service for external access. In a kind cluster, you can also use a software-based load balancer like MetalLB or the cloud-provider-kind tool to simulate a LoadBalancer service type
+
+> By default, the LoadBalancer service type in Kubernetes is intended for cloud environments (AWS, GCP, Azure, etc.) that have native load balancer support. A local kind cluster does not have this functionality built-in, so a service of type LoadBalancer will remain in a "pending" state
+
 
 ```yaml
 apiVersion: v1
