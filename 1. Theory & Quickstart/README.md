@@ -373,3 +373,9 @@ You have:
 ✔ Added health checks
 
 ---
+
+---
+
+# Kubernetes Internal components
+
+There are several internal components created while creating the cluster. Here is a document about them - [Internal Components](./Resources/Internal%20Components.md)
