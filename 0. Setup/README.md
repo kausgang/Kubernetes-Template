@@ -187,4 +187,6 @@ kind delete cluster --name kind-cluster2
 
 ---
 
-Would you like me to generate a downloadable PDF version of this document for easy reference?
+# Create Cluster with Terraform
+
+[See this](./Terraform/README.md)
