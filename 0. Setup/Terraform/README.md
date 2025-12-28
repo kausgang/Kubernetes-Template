@@ -16,6 +16,6 @@ To do it with Terraform on NJ machine follow this
 
 5. `terraform init`
 
-6. `terraform apply -auto-approve`
+6. `terraform apply -auto-approve` **This is done for NJ machine. If you are not on NJ machine, change [create-cluster](./Create-Cluster/create-cluster.tf) file accordingly**
 
 7. When you want to delete cluster - `terraform destroy`
