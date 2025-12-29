@@ -14,8 +14,10 @@ To do it with Terraform on NJ machine follow this
 
 4. cd into `[Create-Cluster](./Create-Cluster/)` folder
 
-5. `terraform init`
+5. `terraform init` to download the specified version of the Kubernetes provider
 
-6. `terraform apply -auto-approve` **This is done for NJ machine. If you are not on NJ machine, change [create-cluster](./Create-Cluster/create-cluster.tf) file accordingly**
+6. (Optional) Next, use `terraform plan` to display a list of resources to be created, and highlight any possible unknown attributes at apply time. For Deployments, all disk options are shown at plan time, but none will be created unless explicitly configured in the Deployment resource
 
-7. When you want to delete cluster - `terraform destroy`
+7. `terraform apply -auto-approve` **This is done for NJ machine. If you are not on NJ machine, change [create-cluster](./Create-Cluster/create-cluster.tf) file accordingly**
+
+8. When you want to delete cluster - `terraform destroy`
