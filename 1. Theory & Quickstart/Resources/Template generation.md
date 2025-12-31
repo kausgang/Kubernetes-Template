@@ -94,6 +94,8 @@ These extensions enhance productivity and reduce errors when working with manife
 
 ---
 
+## **Kubernetes dashboard also has a nice way to generate template from form**
+
 ## **Conclusion**
 
 Depending on your workflow and complexity, you can choose from:

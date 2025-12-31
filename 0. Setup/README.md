@@ -189,4 +189,70 @@ kind delete cluster --name kind-cluster2
 
 # Create Cluster with Terraform
 
-[See this](./Terraform/README.md)
+Step by step guide to setup a cluster using terraform - [See this](./Terraform/README.md)
+
+---
+
+# Deploy Kubernetes dashboard
+
+https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
+
+```sh
+helm repo update
+helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
+helm install kubernetes-dashboard kubernetes-dashboard/kubernetes-dashboard --create-namespace --namespace kubernetes-dashboard
+```
+
+![](IMAGES/2025-12-31-13-01-54.png)
+
+![](IMAGES/2025-12-31-13-02-22.png)
+
+## Create admin user to login into the dashboard application
+
+https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/#accessing-the-dashboard-ui
+
+https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md
+
+**Follow the github guide**
+
+### Create service account
+
+Create a manifest file in anywhere in your machine and cd into that location
+
+```yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: admin-user
+  namespace: kubernetes-dashboard
+```
+
+![](IMAGES/2025-12-31-13-10-46.png)
+
+Apply the changes
+
+`kubectl apply -f dashboard-adminuser.yaml`
+
+![](IMAGES/2025-12-31-13-12-01.png)
+
+```sh
+C:\Users\typgang\Downloads>kubectl get serviceaccounts -n kubernetes-dashboard
+NAME                                   SECRETS   AGE
+admin-user                             0         2m43s
+default                                0         148m
+kubernetes-dashboard-api               0         148m
+kubernetes-dashboard-kong              0         148m
+kubernetes-dashboard-metrics-scraper   0         148m
+kubernetes-dashboard-web               0         148m
+
+C:\Users\typgang\Downloads>
+```
+
+### Access the token
+
+The step to create a cluster role binding was not needed for the kind cluster - https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md#creating-a-clusterrolebinding
+
+
+Issue this command to get the bearer token - `kubectl -n kubernetes-dashboard create token admin-user`
+
+![](IMAGES/2025-12-31-13-18-01.png)
