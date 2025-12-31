@@ -96,6 +96,9 @@ These extensions enhance productivity and reduce errors when working with manife
 
 ## **Kubernetes dashboard also has a nice way to generate template from form**
 
+https://github.com/kausgang/Kubernetes-Template/tree/main/0.%20Setup#why-kubernetes-dashboard
+
+
 ## **Conclusion**
 
 Depending on your workflow and complexity, you can choose from:
