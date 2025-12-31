@@ -256,3 +256,16 @@ The step to create a cluster role binding was not needed for the kind cluster - 
 Issue this command to get the bearer token - `kubectl -n kubernetes-dashboard create token admin-user`
 
 ![](IMAGES/2025-12-31-13-18-01.png)
+
+### Use the token to access the dashboard 
+
+use the token on https://localhost:8443/
+
+![](IMAGES/2025-12-31-13-19-40.png)
+
+
+# Why Kubernetes dashboard
+
+This has a nice way to create resource from a form input 
+
+![](IMAGES/2025-12-31-13-21-00.png)
