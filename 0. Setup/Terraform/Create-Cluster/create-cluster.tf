@@ -6,6 +6,8 @@ resource "null_resource" "kind_cluster" {
 
 
     # Ensure kind is available in PATH
+
+    # Create the Kind cluster with kind-config.yml
     provisioner "local-exec" {
     command = <<-EOT
         kind create cluster --name ${var.cluster_name} --config kind-config.yaml
@@ -13,6 +15,7 @@ resource "null_resource" "kind_cluster" {
     interpreter = ["cmd", "/C"]
     }
 
+    
     provisioner "local-exec" { 
     command = "podman exec -it ${var.cluster_name}-control-plane update-ca-certificates"
     }
