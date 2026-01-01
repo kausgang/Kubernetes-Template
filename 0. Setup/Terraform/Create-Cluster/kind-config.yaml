@@ -6,3 +6,5 @@ nodes:
   extraMounts:
   - hostPath: Zscaler_Root_CA.crt
     containerPath: /usr/local/share/ca-certificates/zscaler.crt
+  - hostPath: /mnt/c/Users/typgang/Downloads
+    containerPath: /data

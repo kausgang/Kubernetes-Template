@@ -21,3 +21,13 @@ To do it with Terraform on NJ machine follow this
 7. `terraform apply -auto-approve` **This is done for NJ machine. If you are not on NJ machine, change [create-cluster](./Create-Cluster/create-cluster.tf) file accordingly**
 
 8. When you want to delete cluster - `terraform destroy`
+
+## Explaination of Terraform files
+
+- The terraform files create a kind cluster by executing commands. The `create-cluster.tf` is the main file and it uses `variables.tf` & `versions.tf`.
+- `versions.tf` contains the providers. When you run terraform init, it downloads the providers. Since here I am only running local executable, i only need null provider - https://registry.terraform.io/providers/hashicorp/null/latest
+- The kind cluster is created with a config file called - `kind-config.yaml`
+- this config file creates two mount points 
+    - one for zscaler certificate - https://github.com/kausgang/TechLearning/blob/main/ZScaler/Resources/Kubernetes%20fix.md
+    - Other for creating a persistent volume - https://github.com/kausgang/Kubernetes-Template/tree/main/Volume
+    if you need to create a PV or PVC later, you can use this mount point.
