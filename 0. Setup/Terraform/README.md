@@ -1,3 +1,13 @@
+> You need to make sure podman can pull images. If not follow this guide - https://github.com/kausgang/TechLearning/blob/main/ZScaler/Resources/Podman%20fix.md
+
+
+> Also this setup uses `C:\INSTALLED` folder from windows machine to create a mount point. This mount point can be later used for PV. I chose C:\INSTALLED as this folder is usually present in my machines.
+
+
+---
+---
+
+
 # Create a kind cluster with Terraform (on NJ Laptop)
 
 NJ machines have zscaler ZIA running and KIND requires the Zscaler root certificate applied on the cluster.
@@ -30,4 +40,5 @@ To do it with Terraform on NJ machine follow this
 - this config file creates two mount points 
     - one for zscaler certificate - https://github.com/kausgang/TechLearning/blob/main/ZScaler/Resources/Kubernetes%20fix.md
     - Other for creating a persistent volume - https://github.com/kausgang/Kubernetes-Template/tree/main/Volume
-    if you need to create a PV or PVC later, you can use this mount point.
+    if you need to create a PV or PVC later, you can use this mount point. **The Mount point on the Control-plane is /data. Keep this in mind when creating PV or PVC**
+

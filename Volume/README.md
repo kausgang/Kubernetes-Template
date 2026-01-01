@@ -128,13 +128,17 @@ apiVersion: kind.x-k8s.io/v1alpha4
 nodes:
   - role: control-plane
     extraMounts:
-      - hostPath: /mnt/c/k8s-data
+      - hostPath: /k8s-data
         containerPath: /data/windows
 ```
 
+> `hostPath: /k8s-data` has been mentioned as when kind takes a configuration file, it translates that to a command and it appends `c:\` to it. So `/k8s-data` becomes `c:/k8s-data`. Below is the proof with an example - 
+
+
+![](IMAGES/2026-01-01-18-04-13.png)
+
 ### Why this works
 
-- `/mnt/c/k8s-data` is how Windows `C:\k8s-data` appears inside WSL
 - `/data/windows` is the path **inside the kind node**
 
 ---
