@@ -1,0 +1,27 @@
+# Terraform 
+
+# Terraform generated files
+.terraform/
+.terraform.tfstate.lock.info
+*.tfstate
+*.tfstate.*.backup
+*.tfrun.json
+
+# Variable files that might contain sensitive information
+# Adjust this based on your team's secrets management approach
+*.tfvars
+*.tfvars.json
+
+# Saved plan files
+*.tfplan
+*.tfplan.binary
+
+# Crash log files
+crash.log
+
+# Terraform CLI configuration files
+.terraformrc
+terraform.rc
+
+.terraform.tfstate
+.terraform.tfstate.backup
